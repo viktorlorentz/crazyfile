@@ -3,7 +3,7 @@ A tiny Python CLI and library to **“crazy-compress”** large numeric lists in
 
 **Key features**  
 - Convert `.yaml` ↔ `.crazy.yaml` with one command  
-- Compress large lists using NumPy at your chosen float precision (`float16`, `float32`, etc.)  
+- Compress large lists using NumPy and GZip at your chosen float precision (`float16`, `float32`, etc.)  
 - Achieve up to 10× size reduction:  
     - 50 000‐element list goes from ~7.6 MB → ~730 KB (float16)  
     - → ~1.5 MB (float32)  
