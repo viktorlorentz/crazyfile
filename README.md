@@ -3,6 +3,8 @@
 A tiny Python tool to “crazy-compress” large lists inside YAML while leaving the rest human-readable.
 It turns .yaml -> .crazy.yaml and .crazy.yaml -> .yaml.
 
+In our tests, it can reduce the size of e.g. a yaml file with a list of 50000 states from 7,6 MB to 730KB, which is a 10x reduction in size with float16 precision and 1,5 MB with float32 precision.
+
 It is useful for large lists that you want to keep in a human-readable format, but also want to compress for storage. We use numpy to compress numerical arrays to a given float precision.
 
 
@@ -59,7 +61,9 @@ python crazyfile.py --to-crazy input.yaml output.crazy.yaml --dtype float32
 
 ## Use Crazyfile in Your Project
 
-You can import `crazyfile` in your Python code to programmatically export `.crazy.yaml` files. Ensure the repository (or installed package) is on your `PYTHONPATH`.
+You can import `crazyfile` in your Python code to programmatically export `.crazy.yaml` files. Ensure the repository (or installed package) is on your `PYTHONPATH`. 
+
+If you want you can also just copy the `crazyfile.py` file into your project and use it directly.
 
 ```python
 from crazyfile import yaml_to_crazy, store_data_to_crazy
