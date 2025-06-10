@@ -1,6 +1,6 @@
 import numpy as np
 from ruamel.yaml import YAML
-from crazyfile import yaml_to_crazy, crazy_to_yaml
+from crazyyaml import yaml_to_crazy, crazy_to_yaml
 from testdata import generate_data
 
 yaml = YAML()

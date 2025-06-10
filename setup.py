@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="crazyfile",
+    name="crazyyaml",
     version="0.1.0",
     description="Crazy-compress large lists in YAML using numpy and gzip",
     author="Viktor Lorentz",
@@ -12,7 +12,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "crazyfile=crazyfile.crazyfile:main",
+            "crazyyaml=crazyyaml.crazyyaml:main",
         ],
     },
 )

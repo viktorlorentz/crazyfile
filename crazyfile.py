@@ -25,9 +25,6 @@ def _compress_list(lst, threshold, dtype=DEFAULT_DTYPE):
             new_list.append(_compress_list(item, threshold, dtype))
         # If this list is large, compress it
         if len(new_list) > threshold:
-            # Only compress if elements are not already compressed (bytes)
-            if any(isinstance(item, bytes) for item in new_list):
-                return new_list
             # apply requested dtype here
             arr = np.array(new_list, dtype=dtype)
             buf = io.BytesIO()
