@@ -1,6 +1,5 @@
 import io
 import gzip
-import base64
 import argparse
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedSeq
