@@ -30,24 +30,36 @@ large_list: !!binary |
     935urPVZuZIp5auVq1g....
 ```
 
+## Installation
+Install from local source:
+```bash
+pip install .
+```
+You can also just copy the `crazyfile.py` file into your project and use it directly.
+
+For development dependencies and tests:
+```bash
+pip install -r requirements.txt pytest
+```
+
 ## Usage
 
-Convert a normal YAML to a `.crazy.yaml` (compressing lists >20 elements with numpy):
+Convert a normal YAML to a `.crazy.yaml` (compressing lists >20 elements with numpy) via the `crazyfile` CLI:
 
 ```bash
-python crazyfile.py --to-crazy input.yaml output.crazy.yaml
+crazyfile --to-crazy input.yaml output.crazy.yaml
 ```
 
 Restore a `.crazy.yaml` back to plain YAML:
 
 ```bash
-python crazyfile.py --decompress output.crazy.yaml restored.yaml
+crazyfile --decompress output.crazy.yaml restored.yaml
 ```
 
 You can override the default compression threshold of minimum list length:
 
 ```bash
-python crazyfile.py --to-crazy in.yaml out.crazy.yaml --threshold 50
+crazyfile --to-crazy in.yaml out.crazy.yaml --threshold 50
 ```
 
 ## Custom float precision (dtype)
@@ -55,8 +67,8 @@ python crazyfile.py --to-crazy in.yaml out.crazy.yaml --threshold 50
 By default, crazyfile compresses numerical arrays using `float16`, which can shrink blob sizes by 5x - 15x compared to `float32` or `float64`. You can select the precision with the `--dtype` option:
 
 ```bash
-python crazyfile.py --to-crazy input.yaml output.crazy.yaml --dtype float16
-python crazyfile.py --to-crazy input.yaml output.crazy.yaml --dtype float32
+crazyfile --to-crazy input.yaml output.crazy.yaml --dtype float16
+crazyfile --to-crazy input.yaml output.crazy.yaml --dtype float32
 ```
 
 ## Use Crazyfile in Your Project
