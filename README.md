@@ -1,4 +1,4 @@
-# crazyfile
+# .crazy.yaml
 A tiny Python CLI and library to **“crazy-compress”** large numeric lists in YAML files while preserving human-readable sections.
 
 **Key features**  
