@@ -1,15 +1,18 @@
 # crazyfile
+A tiny Python CLI and library to **“crazy-compress”** large numeric lists in YAML files while preserving human-readable sections.
 
-A tiny Python tool to “crazy-compress” large lists inside YAML while leaving the rest human-readable.
-It turns .yaml -> .crazy.yaml and .crazy.yaml -> .yaml.
+**Key features**  
+- Convert `.yaml` ↔ `.crazy.yaml` with one command  
+- Compress large lists using NumPy at your chosen float precision (`float16`, `float32`, etc.)  
+- Achieve up to 10× size reduction:  
+    - 50 000‐element list goes from ~7.6 MB → ~730 KB (float16)  
+    - → ~1.5 MB (float32)  
+- Keeps small or critical fields fully readable
 
-In our tests, it can reduce the size of e.g. a yaml file with a list of 50000 states from 7,6 MB to 730KB, which is a 10x reduction in size with float16 precision and 1,5 MB with float32 precision.
+Originally built for Crazyflie quadrotor experiments at [IMRC LAB](https://imrclab.github.io), but works for any YAML with large floating-point arrays.
 
-It is useful for large lists that you want to keep in a human-readable format, but also want to compress for storage. We use numpy to compress numerical arrays to a given float precision.
-
-
-It was designed for experiments with the crazyflie quadrotors at [IMRC LAB](https://imrclab.github.io), but can be used for any YAML files with large arrays with floating point values like this:
-
+## Example
+Here's a simple example of how `crazyfile` works:
 ```yaml
 readable_number: 42
 some_text: "This is a human-readable text."
