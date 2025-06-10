@@ -105,3 +105,12 @@ store_data_to_crazy(
 ```
 
 Adjust `threshold` and `dtype` as needed for your data.
+
+## Compression Benchmarks
+Here are some benchmarks comparing the size of compressed `.crazy.yaml` files against their original YAML counterparts (N = 10000):
+tests/test_compression_report.py 
+| dtype | orig | comp | ratio | max_abs_err | max_rel_err |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| float16 | 1516531 | 146607 | 0.097 | 2.441e-04 | 9.570e-04 |
+| float32 | 1516531 | 306716 | 0.202 | 2.980e-08 | 5.946e-08 |
+| float64 | 1516531 | 643673 | 0.424 | 0.000e+00 | 0.000e+00 |

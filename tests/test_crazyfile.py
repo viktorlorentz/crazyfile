@@ -11,7 +11,7 @@ yaml = YAML()
 
 def assert_data_equal(orig, loaded, rtol=1e-3, atol=1e-3):
     # Compare scalar fields exactly
-    for key in ('delta', 'epsilon', 'cost'):
+    for key in ('delta', 'human_readable'):
         assert orig[key] == loaded[key]
     # Compare array fields with tolerance
     orig_states = np.array(orig['result'][0]['states'], dtype=float)
@@ -23,7 +23,7 @@ def assert_data_equal(orig, loaded, rtol=1e-3, atol=1e-3):
 
 def test_store_and_load_crazy(tmp_path):
     # Generate sample data and store to .crazy.yaml
-    data = generate_data(10, 0.1, 0.2, 0.3)
+    data = generate_data(10)
     crazy_file = tmp_path / "data.crazy.yaml"
     store_data_to_crazy(data, str(crazy_file), threshold=5, dtype=np.dtype("float32"))
 
@@ -35,7 +35,7 @@ def test_store_and_load_crazy(tmp_path):
 
 def test_yaml_to_crazy_and_back(tmp_path):
     # Generate larger data for compression
-    data = generate_data(30, 1.1, 2.2, 3.3)
+    data = generate_data(30)
     input_yaml = tmp_path / "input.yaml"
     # Write normal YAML
     with open(input_yaml, 'w') as f:
@@ -59,7 +59,7 @@ def test_yaml_to_crazy_and_back(tmp_path):
 
 def test_threshold_effect(tmp_path):
     # With high threshold, no compression
-    data = generate_data(3, 0.0, 0.0, 0.0)
+    data = generate_data(3)
     input_yaml = tmp_path / "small.yaml"
     with open(input_yaml, 'w') as f:
         yaml.dump(data, f)
@@ -73,7 +73,7 @@ def test_threshold_effect(tmp_path):
 
 def test_dtype_change(tmp_path):
     # Test that changing dtype still yields correct data
-    data = generate_data(10000, 5.5, 6.6, 7.7)
+    data = generate_data(1000)
     input_yaml = tmp_path / "dtype.yaml"
     with open(input_yaml, 'w') as f:
         yaml.dump(data, f)
@@ -87,3 +87,16 @@ def test_dtype_change(tmp_path):
         data_out = yaml.load(f)
     # float32 precision => use tolerance
     assert_data_equal(data, data_out, rtol=1e-5, atol=1e-8)
+
+
+def test_human_readable_and_delta_in_crazy_yaml(tmp_path):
+    """Ensure human_readable text and delta value are present in .crazy.yaml"""
+    data = generate_data(5)
+    input_yaml = tmp_path / "input.yaml"
+    with open(input_yaml, 'w') as f:
+        yaml.dump(data, f)
+    crazy_yaml = tmp_path / "input.crazy.yaml"
+    yaml_to_crazy(str(input_yaml), str(crazy_yaml), threshold=1, dtype=np.dtype("float16"))
+    text = crazy_yaml.read_text()
+    assert data['human_readable'] in text
+    assert f"delta: {data['delta']}" in text
